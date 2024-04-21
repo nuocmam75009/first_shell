@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern char **environ; /* environment variable */
+
 int main(int ac, char **argv)
 {
 	char *prompt = "(Eshell) $ ";
@@ -67,6 +69,17 @@ int main(int ac, char **argv)
 		{
 			printf("Exiting shell ...\n");
 			break;
+		}
+
+		if (argv[0] != NULL && strcmp(argv[0], "env") == 0)
+		{
+			char **env = environ;
+			while (*env)
+			{
+				printf("%s\n", *env);
+				env++;
+			}
+			continue;
 		}
 
 		/* execute the command */
