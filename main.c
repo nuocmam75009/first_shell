@@ -62,6 +62,13 @@ int main(int ac, char **argv)
 		}
 		argv[i] = NULL;
 
+		/* check if arg is "exit"*/
+		if (argv[0] != NULL && strcmp(argv[0], "exit") == 0)
+		{
+			printf("Exiting shell ...\n");
+			break;
+		}
+
 		/* execute the command */
 		execmd(argv);
 
