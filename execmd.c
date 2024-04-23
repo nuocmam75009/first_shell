@@ -1,15 +1,22 @@
 #include "main.h"
 
-void execmd(char **argv){
+/**
+ * execmd - function to execute a command
+ * @argv: An array of arguments
+ * Description: forks a new process and executes a command
+ */
+
+void execmd(char **argv)
+{
 	char *command = NULL, *actual_command = NULL;
-	pid_t pid = fork(); // tout en dessous éxécuté deux fois
+	pid_t pid = fork(); /* tout en dessous éxécuté deux fois */
 	int status;
 
 	if (pid == -1)
 	{
 		perror("Error:");
 		free(argv);
-		return (1);
+		/* return (1); */
 	}
 
 	if (pid == 0)
@@ -27,21 +34,49 @@ void execmd(char **argv){
 			{
 				perror("Error:");
 			}
+            free(argv);
 		}
+
 	}
 
-	else // pid > 0 donc c'est le code du parent
-	{
-		wait (&status); //wait for child to finish
 
-		if (WIFEXITED(status)) // check if child process exited normally
+	else /* pid > 0 donc c'est le code du parent */
+	{
+
+		wait (&status); /*wait for child to finish*/
+
+		if (WIFEXITED(status)) /*check if child process exited normally*/
 		{
-			if (WEXITSTATUS(status) != 0) //check status exit of child process
+			if (WEXITSTATUS(status) != 0) /*check status exit of child process*/
 			{
 				free(argv);
-				exit(2);
+                free(actual_command);
+				exit(1);
 			}
 		}
 
 	}
 }
+/*
+void handle_command(char **argv)
+{
+    int i;
+
+    if (argv[0] != NULL && strcmp(argv[0], "echo") == 0)
+    {
+        printf("Exiting shell... \n");
+        exit(0);
+    }
+
+    if (argv[0] != NULL && strcmp(argv[0], "echo") == 0)
+    {
+        for (i = 1; argv[i] != NULL; i++)
+        {
+            printf("%s", argv[i]);
+        }
+        printf("\n");
+        return;
+    }
+    execmd(argv);
+}
+*/
