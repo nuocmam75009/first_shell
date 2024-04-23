@@ -19,28 +19,33 @@ int tokenize(char *lineptr)
 			return(-1);
 		}
 		num_tokens = getLenghtToken(lineptr, delim);
-		char *argv = malloc(sizeof(char *) * num_tokens + 1);
+		char **argv = malloc(sizeof(char *) * num_tokens);
+		token = strtok(lineptr, delim);
+		int i = 0;
 		while (token != NULL)
 		{
-			argv[num_tokens] = malloc(sizeof(char) * 128);
-			strcpy(argv[num_tokens], token); 
-			num_tokens++;
+			argv[i] = malloc(128 * sizeof(char*));
+			strcpy(argv[i], token); 
+			++i;
 			token = strtok(NULL, delim);
 		}
-        //argv[i] = NULL;
-        free(argv);
+		argv[i] = NULL;
+        execmd(argv);
+		for (int i = 0 ; i < num_tokens; i++)
+			free(argv[i]);
+		free(argv);
         free(token);
 }
 
 int getLenghtToken(char *lineptr, char* delim) {
-	char *buffer;
+	char *buffer,token;
     int num_tokens = 0;
 	strcpy(buffer,lineptr);
 	
-	strtok(buffer, delim);
-	while (buffer != NULL){
+	token = strtok(buffer, delim);
+	while (token != NULL){
         ++num_tokens;
-		strtok(NULL, delim);
+		token = strtok(NULL, delim);
 	}
 	return num_tokens;
 }

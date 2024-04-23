@@ -9,7 +9,7 @@
 void execmd(char **argv);
 char *get_location(char *command);
 int stat(const char *pathname, struct stat *statbuf);
-int read_prompt(char *prompt, ssize_t *nchars_read, char **lineptr);
+int read_prompt(char *prompt, ssize_t *nchars_read, char *lineptr);
 extern char **environ;
 int tokenize(char *lineptr);
 int getLenghtToken(char *lineptr, char* delim);

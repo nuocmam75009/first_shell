@@ -13,16 +13,12 @@ int main(int ac, char **argv)
 		/*appel à read_prompt*/
 		if (read_prompt(prompt, &nchars_read, &lineptr) <= -1)
 		{
-			free(prompt);
-			free(nchars_read);
-			free(lineptr);
 			return (-1);
 		}
 		tokenize(lineptr);
-
 	}
 	/* free up allocated memory */
-	free(lineptr);
+	//free(lineptr);
 
 	return (0);
 }

@@ -15,7 +15,6 @@ void execmd(char **argv)
 	if (pid == -1)
 	{
 		perror("Error:");
-		free(argv);
 		/* return (1); */
 	}
 
@@ -34,11 +33,8 @@ void execmd(char **argv)
 			{
 				perror("Error:");
 			}
-            free(argv);
 		}
-
 	}
-
 
 	else /* pid > 0 donc c'est le code du parent */
 	{
@@ -49,8 +45,6 @@ void execmd(char **argv)
 		{
 			if (WEXITSTATUS(status) != 0) /*check status exit of child process*/
 			{
-				free(argv);
-                free(actual_command);
 				exit(1);
 			}
 		}
