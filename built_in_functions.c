@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern char **environ; /* environment variable */
+
 /**
  * exit_shell - Exits the shell
  * Description: Exits the shell when the user types the 'exit' command.

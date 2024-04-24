@@ -1,3 +1,5 @@
+#include "main.h"
+
 int exec_prompt(char *prompt) {
     
     printf("%s", prompt);
